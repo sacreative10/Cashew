@@ -35,13 +35,22 @@ target_link_libraries("imgui" PRIVATE glfw)
 find_package(Vulkan REQUIRED)
 
 add_library(Cashew STATIC
-        src/Layer.h
-        src/Application.h
-        src/Application.cpp
-        src/EntryPoint.h
-        )
+        src/CashewLib/Layer.h
+        src/CashewLib/Application.h
+        src/CashewLib/Application.cpp
+        src/CashewLib/EntryPoint.h
+        src/CashewLib/Image.cpp
+        src/CashewLib/Image.h
+        src/CashewLib/Input/KeyCodes.h
+        src/CashewLib/Input/Input.h
+        src/CashewLib/Input/Input.cpp
+)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+include_directories(Cashew PRIVATE ../external/stb_image/)
+include_directories(Cashew PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 target_include_directories(Cashew PUBLIC ${IMGUI_PATH} ${Vulkan_INCLUDE_DIRS})
 target_include_directories(Cashew PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
